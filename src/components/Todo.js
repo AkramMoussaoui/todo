@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-
+import React from "react";
+import { checkTodo } from "../Redux/Actions/todoActions";
+import { useDispatch } from "react-redux";
 const Todo = (props) => {
-  const [todo, setTodo] = useState(props.todo);
+  const dispatch = useDispatch();
 
   return (
     <li
-      className={`${todo.checked ? "checked" : ""}`}
-      onClick={() => setTodo({ ...todo, checked: !todo.checked })}
+      className={`${props.todo.checked ? "checked" : ""}`}
+      onClick={() => dispatch(checkTodo(props.todo.id))}
     >
-      {todo.task}
+      {props.todo.task}
     </li>
   );
 };

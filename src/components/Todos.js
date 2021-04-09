@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import Todo from "./Todo";
-
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../Redux/Actions/todoActions";
 const Todos = (props) => {
-  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("Title...");
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos);
 
-  const addTodo = () => {
+  const addTodos = () => {
     if (input && input !== "Title...") {
-      setTodos([
-        ...todos,
-        {
-          id: todos.length,
+      dispatch(
+        addTodo({
+          id: uuidv4(),
           task: input,
           checked: false,
-        },
-      ]);
+        })
+      );
     }
   };
   return (
@@ -27,7 +29,7 @@ const Todos = (props) => {
           id="myInput"
           placeholder={input}
         />
-        <span onClick={() => addTodo()} className="addBtn">
+        <span onClick={() => addTodos()} className="addBtn">
           Add
         </span>
       </div>
