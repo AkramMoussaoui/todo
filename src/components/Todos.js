@@ -6,8 +6,8 @@ import { addTodo } from "../Redux/Actions/todoActions";
 const Todos = (props) => {
   const [input, setInput] = useState("Title...");
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
-
+  const todos = useSelector((state) => state.todo.todos);
+  console.log(todos);
   const addTodos = () => {
     if (input && input !== "Title...") {
       dispatch(
@@ -44,3 +44,12 @@ const Todos = (props) => {
 };
 
 export default Todos;
+
+// state = {
+//   todo : {
+//     todos : []
+//   },
+//   user : {
+//     users : []
+//   }
+// }
